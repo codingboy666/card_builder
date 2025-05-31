@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹壳AI - 祝福卡片生成器</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="logo-container">
+                <div class="app-name">祝福卡片生成器</div>
+            </div>
+            <p class="tagline">创建并分享您的专属祝福</p>
+        </header>
+        
+        <div class="card-generator">
+            <div class="form-container">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="holiday">选择节日</label>
+                        <select id="holiday" name="holiday">
+                            <option value="" disabled selected>请选择节日</option>
+                            <!-- 传统节日 -->
+                            <option value="spring-festival">春节</option>
+                            <option value="lantern-festival">元宵节</option>
+                            <option value="qingming-festival">清明节</option>
+                            <option value="dragon-boat">端午节</option>
+                            <option value="qixi-festival">七夕节</option>
+                            <option value="mid-autumn">中秋节</option>
+                            <option value="double-ninth">重阳节</option>
+                            <option value="winter-solstice">冬至</option>
+                            <!-- 其他节日（按日期顺序排列） -->
+                            <option value="new-year">新年</option>
+                            <option value="valentine-day">情人节</option>
+                            <option value="womens-day">妇女节</option>
+                            <option value="april-fools">愚人节</option>
+                            <option value="labor-day">劳动节</option>
+                            <option value="mothers-day">母亲节</option>
+                            <option value="childrens-day">儿童节</option>
+                            <option value="fathers-day">父亲节</option>
+                            <option value="teachers-day">教师节</option>
+                            <option value="national-day">国庆节</option>
+                            <option value="halloween">万圣节</option>
+                            <option value="thanksgiving">感恩节</option>
+                            <option value="christmas">圣诞节</option>
+                            <option value="birthday">生日</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sender">发信人姓名</label>
+                        <input type="text" id="sender" name="sender" placeholder="请输入您的姓名">
+                    </div>
+                </div>
+                
+                <button id="generate-btn" class="btn">生成祝福卡片</button>
+            </div>
+            
+            <div class="card-preview-container">
+                <div class="card-preview" id="card-preview">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="holiday-icon">🎉</span>
+                            <h2 class="holiday-title">节日祝福</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="greeting" id="greeting-text">选择一个节日，生成您的专属祝福语...</p>
+                            <div class="signature-container">
+                                <p class="signature">祝好，<br><span id="sender-name">我</span></p>
+                                <p class="current-date" id="current-date"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button id="download-btn" class="btn btn-download" disabled>保存卡片</button>
+                    <button id="share-btn" class="btn btn-share" disabled>分享卡片</button>
+                    
+                    <!-- 分享选项弹窗 -->
+                    <div id="share-modal" class="share-modal">
+                        <div class="share-content">
+                            <div class="share-header">
+                                <h3>分享到</h3>
+                                <span class="close-share">&times;</span>
+                            </div>
+                            <div class="share-options">
+                                <div class="share-option" data-platform="wechat">
+                                    <div class="share-icon wechat-icon">
+                                        <i class="icon-wechat"></i>
+                                    </div>
+                                    <span>微信</span>
+                                </div>
+                                <div class="share-option" data-platform="qq">
+                                    <div class="share-icon qq-icon">
+                                        <i class="icon-qq"></i>
+                                    </div>
+                                    <span>QQ</span>
+                                </div>
+                                <div class="share-option" data-platform="douyin">
+                                    <div class="share-icon douyin-icon">
+                                        <i class="icon-douyin"></i>
+                                    </div>
+                                    <span>抖音</span>
+                                </div>
+                                <div class="share-option" data-platform="xiaohongshu">
+                                    <div class="share-icon xiaohongshu-icon">
+                                        <i class="icon-xiaohongshu"></i>
+                                    </div>
+                                    <span>小红书</span>
+                                </div>
+                            </div>
+                            <div class="share-footer">
+                                <p class="share-tip">点击图标直接下载图片分享</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>由 <strong>弹壳AI</strong> 提供技术支持</p>
+                    <p>© 祝福卡片生成器 - 让每一份祝福都温暖人心</p>
+                </div>
+                <div class="footer-qrcode">
+                    <img src="images/image.png" alt="弹壳AI二维码" class="qrcode-image" id="qrcode-img">
+                    <p>扫码关注弹壳AI公众号</p>
+                </div>
+                
+                <!-- 二维码放大弹窗 -->
+                <div id="qrcode-modal" class="qrcode-modal">
+                    <span class="close-modal">&times;</span>
+                    <img class="modal-content" id="modal-img">
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

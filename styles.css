@@ -1,0 +1,851 @@
+:root {
+    --primary-color: #5d45e5;
+    --primary-light: #e0dbff;
+    --secondary-color: #15c5a4;
+    --background-color: #f8f9fe;
+    --card-background: #ffffff;
+    --text-color: #1a1c2e;
+    --text-secondary: #5a5d72;
+    --border-color: #e5e7eb;
+    --shadow-color: rgba(93, 69, 229, 0.1);
+    --success-color: #15c5a4;
+    --error-color: #f45b69;
+    --gradient-start: #7f63ff;
+    --gradient-end: #5d45e5;
+    --gradient-start-rgb: 127, 99, 255;
+    --gradient-end-rgb: 93, 69, 229;
+    --secondary-rgb: 21, 197, 164;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background-color: var(--background-color);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(93, 69, 229, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(21, 197, 164, 0.03) 0%, transparent 50%);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* 新的顶部样式 - 左对齐 */
+.main-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    border-radius: 3px;
+}
+
+.logo-container {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.brand-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.app-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* 移除旧的顶部样式 */
+.top-header,
+.brand-text,
+header h1,
+header p {
+    display: none;
+}
+
+.card-generator {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.form-container {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(93, 69, 229, 0.15);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: var(--background-color);
+    transition: all 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(93, 69, 229, 0.2);
+    margin-top: auto;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(93, 69, 229, 0.3);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(93, 69, 229, 0.2);
+}
+
+.btn:disabled {
+    background: linear-gradient(to right, #b4b4b4, #9ca3af);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-download {
+    background: linear-gradient(to right, var(--secondary-color), #0ca189);
+    box-shadow: 0 4px 12px rgba(21, 197, 164, 0.2);
+}
+
+.btn-download:hover {
+    box-shadow: 0 8px 20px rgba(21, 197, 164, 0.3);
+}
+
+.card-preview-container {
+    flex: 1.5;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card-preview {
+    background-color: var(--card-background);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    height: 450px;
+    width: 100%;
+    position: relative;
+    transition: all 0.5s;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: normal;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.card-preview:hover {
+    transform: translateY(-10px) rotateY(5deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.card-content {
+    height: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    margin: 0;
+    height: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transform: translateZ(30px);
+    transition: transform 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.card-preview:hover .card-content {
+    transform: translateZ(50px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* 移除卡片角落装饰样式 */
+.card-corner {
+    display: none;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(93, 69, 229, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background-color: #7f63ff; /* 使用纯色代替渐变 */
+}
+
+.holiday-icon {
+    font-size: 2.5rem;
+    margin-right: 0.75rem;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+    transform: translateZ(5px);
+}
+
+.holiday-title {
+    font-size: 1.75rem;
+    color: #7f63ff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transform: translateZ(5px);
+    background: transparent;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.recipient {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.greeting {
+    flex: 1;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-top: 1.5rem;
+    color: var(--text-color);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    letter-spacing: 0.5px;
+    text-align: justify;
+    position: relative;
+    z-index: 2;
+}
+
+.greeting::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    font-size: 3rem;
+    color: rgba(var(--gradient-start-rgb), 0.1);
+    font-family: serif;
+}
+
+.greeting::after {
+    content: '"';
+    position: absolute;
+    bottom: -30px;
+    right: -5px;
+    font-size: 3rem;
+    color: rgba(var(--gradient-start-rgb), 0.1);
+    font-family: serif;
+}
+
+.signature-container {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    border-top: 1px solid rgba(93, 69, 229, 0.1);
+    padding-top: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.signature {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    position: relative;
+    text-align: right;
+    margin-bottom: 0.5rem;
+    border-top: none;
+    padding: 0;
+    width: auto;
+}
+
+.current-date {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-generator {
+        flex-direction: column;
+    }
+    
+    .form-container, .card-preview-container {
+        width: 100%;
+    }
+    
+    .card-preview {
+        height: 400px;
+    }
+}
+
+/* Animation for card generation */
+@keyframes card-pulse {
+    0% { transform: scale(1) rotateY(0deg); }
+    50% { transform: scale(1.03) rotateY(5deg); }
+    100% { transform: scale(1) rotateY(0deg); }
+}
+
+.card-preview.generated {
+    animation: card-pulse 1s ease;
+}
+
+/* 修改节日背景混合模式，使颜色更鲜明，确保圆角正确 */
+.card-preview[data-holiday] {
+    background-clip: padding-box;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.card-preview[data-holiday="new-year"] {
+    background-color: #ffda3d;
+    background-image: url('https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="spring-festival"] {
+    background-color: #ff5a5a;
+    background-image: url('https://images.pexels.com/photos/6212288/pexels-photo-6212288.jpeg');
+    background-blend-mode: screen;
+}
+
+.card-preview[data-holiday="lantern-festival"] {
+    background-color: #ff9f4a;
+    background-image: url('https://images.pexels.com/photos/808910/pexels-photo-808910.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="qingming-festival"] {
+    background-color: #7ad86e;
+    background-image: url('https://images.pexels.com/photos/1107717/pexels-photo-1107717.jpeg');
+    background-blend-mode: soft-light;
+}
+
+.card-preview[data-holiday="womens-day"] {
+    background-color: #ff70b5;
+    background-image: url('https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg');
+    background-blend-mode: screen;
+}
+
+.card-preview[data-holiday="april-fools"] {
+    background-color: #a989ff;
+    background-image: url('https://images.pexels.com/photos/1671325/pexels-photo-1671325.jpeg');
+    background-blend-mode: color-dodge;
+}
+
+.card-preview[data-holiday="labor-day"] {
+    background-color: #52bcff;
+    background-image: url('https://images.pexels.com/photos/8985511/pexels-photo-8985511.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="mothers-day"] {
+    background-color: #ff8fbe;
+    background-image: url('https://images.pexels.com/photos/5765844/pexels-photo-5765844.jpeg');
+    background-blend-mode: screen;
+}
+
+.card-preview[data-holiday="childrens-day"] {
+    background-color: #64d9ff;
+    background-image: url('https://images.pexels.com/photos/1620651/pexels-photo-1620651.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="dragon-boat"] {
+    background-color: #5cdfa0;
+    background-image: url('https://images.pexels.com/photos/13156010/pexels-photo-13156010.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="fathers-day"] {
+    background-color: #6699ff;
+    background-image: url('https://images.pexels.com/photos/708440/pexels-photo-708440.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="qixi-festival"] {
+    background-color: #d175ff;
+    background-image: url('https://images.pexels.com/photos/1024975/pexels-photo-1024975.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="mid-autumn"] {
+    background-color: #ffd166;
+    background-image: url('https://images.pexels.com/photos/631477/pexels-photo-631477.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="teachers-day"] {
+    background-color: #5f9cf9;
+    background-image: url('https://images.pexels.com/photos/5427672/pexels-photo-5427672.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="double-ninth"] {
+    background-color: #ffb366;
+    background-image: url('https://images.pexels.com/photos/1178684/pexels-photo-1178684.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="national-day"] {
+    background-color: #ff5252;
+    background-image: url('https://images.pexels.com/photos/2397651/pexels-photo-2397651.jpeg');
+    background-blend-mode: screen;
+}
+
+.card-preview[data-holiday="halloween"] {
+    background-color: #ff9c38;
+    background-image: url('https://images.pexels.com/photos/619418/pexels-photo-619418.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="thanksgiving"] {
+    background-color: #ffbe4d;
+    background-image: url('https://images.pexels.com/photos/6402827/pexels-photo-6402827.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="winter-solstice"] {
+    background-color: #6dc5ff;
+    background-image: url('https://images.pexels.com/photos/774797/pexels-photo-774797.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="christmas"] {
+    background-color: #5cdd7d;
+    background-image: url('https://images.pexels.com/photos/717988/pexels-photo-717988.jpeg');
+    background-blend-mode: overlay;
+}
+
+.card-preview[data-holiday="valentine-day"] {
+    background-color: #ff5a8c;
+    background-image: url('https://images.pexels.com/photos/5727889/pexels-photo-5727889.jpeg');
+    background-blend-mode: screen;
+}
+
+.card-preview[data-holiday="birthday"] {
+    background-color: #ff6ac1;
+    background-image: url('https://images.pexels.com/photos/2072181/pexels-photo-2072181.jpeg');
+    background-blend-mode: overlay;
+}
+
+/* 底部样式 */
+.footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-info {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+}
+
+.footer-info p {
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+}
+
+.footer-info strong {
+    color: var(--primary-color);
+}
+
+.footer-qrcode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qrcode-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.qrcode-image:hover {
+    transform: scale(1.05);
+}
+
+.qrcode-download {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: var(--primary-light);
+    transition: background-color 0.3s;
+}
+
+.qrcode-download:hover {
+    background-color: #b1bcfc;
+}
+
+.footer-qrcode p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* 二维码放大弹窗 */
+.qrcode-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 40px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-info {
+        text-align: center;
+    }
+}
+
+/* 自动撑满剩余空间 */
+.form-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.separator {
+    color: var(--border-color);
+    font-weight: 300;
+    display: inline-block;
+    margin: 0 0.2rem;
+}
+
+/* 分享按钮样式 */
+.btn-share {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    box-shadow: 0 4px 12px rgba(255, 126, 95, 0.2);
+    margin-left: 10px;
+}
+
+.btn-share:hover {
+    box-shadow: 0 8px 20px rgba(255, 126, 95, 0.3);
+}
+
+/* 分享弹窗样式 */
+.share-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.share-content {
+    background-color: white;
+    width: 360px;
+    max-width: 90%;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modal-in 0.3s ease-out;
+}
+
+@keyframes modal-in {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.share-header {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.share-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.close-share {
+    color: #888;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-share:hover {
+    color: #333;
+}
+
+.share-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px;
+    gap: 15px;
+}
+
+.share-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.share-option:hover {
+    transform: translateY(-3px);
+}
+
+.share-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    color: white;
+    font-size: 24px;
+}
+
+.wechat-icon {
+    background-color: #07C160;
+}
+
+.qq-icon {
+    background-color: #12B7F5;
+}
+
+.douyin-icon {
+    background: linear-gradient(to right, #FF0050, #00F2EA);
+}
+
+.xiaohongshu-icon {
+    background-color: #FE2C55;
+}
+
+.share-option span {
+    font-size: 12px;
+    color: #666;
+}
+
+.share-footer {
+    padding: 16px;
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+}
+
+.share-tip {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.share-qrcode {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+}
+
+/* 社交平台图标样式 */
+.icon-wechat:before {
+    content: "微";
+    font-style: normal;
+}
+
+.icon-qq:before {
+    content: "Q";
+    font-style: normal;
+}
+
+.icon-douyin:before {
+    content: "抖";
+    font-style: normal;
+}
+
+.icon-xiaohongshu:before {
+    content: "红";
+    font-style: normal;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+} 
