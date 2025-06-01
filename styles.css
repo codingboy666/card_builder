@@ -25,12 +25,29 @@
 
 body {
     font-family: 'Noto Sans SC', sans-serif;
-    background-color: var(--background-color);
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(93, 69, 229, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(21, 197, 164, 0.03) 0%, transparent 50%);
     color: var(--text-color);
     line-height: 1.6;
+    /* Background with distinct but lighter colors */
+    background: linear-gradient(-45deg, 
+        rgba(238, 119, 82, 0.45), 
+        rgba(231, 60, 126, 0.45), 
+        rgba(35, 166, 213, 0.45), 
+        rgba(35, 213, 171, 0.45));
+    background-size: 300% 300%;
+    animation: gradient-animation 18s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
@@ -64,7 +81,7 @@ body {
 .logo-container {
     margin-bottom: 0.5rem;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -79,10 +96,12 @@ body {
 
 .app-name {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 300;
     color: var(--text-color);
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
     display: inline-block;
+    font-family: 'Ma Shan Zheng', 'Dancing Script', 'Brush Script MT', cursive;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .tagline {
@@ -118,12 +137,20 @@ header p {
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
-    height: 450px;
+    height: auto;
+    min-height: 450px;
 }
 
 .form-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(93, 69, 229, 0.15);
+}
+
+.form-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .form-group {
@@ -155,8 +182,30 @@ input:focus, select:focus {
     transform: translateY(-2px);
 }
 
+/* Custom greeting textarea */
+#custom-greeting-input {
+    width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    margin-bottom: 0;
+    overflow-y: auto;
+}
+
+.form-actions {
+    margin-top: auto;
+    padding-top: 20px;
+    width: 100%;
+}
+
 .btn {
-    display: inline-block;
+    display: block;
+    width: 100%;
     padding: 0.8rem 1.6rem;
     background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
     color: white;
@@ -167,7 +216,6 @@ input:focus, select:focus {
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 12px rgba(93, 69, 229, 0.2);
-    margin-top: auto;
 }
 
 .btn:hover {
@@ -391,11 +439,39 @@ input:focus, select:focus {
     }
     
     .form-container, .card-preview-container {
-        width: 100%;
+        min-width: 100%;
     }
     
     .card-preview {
-        height: 400px;
+        min-height: 400px;
+    }
+    
+    .main-header {
+        flex-direction: column;
+        position: relative;
+        padding-bottom: 3rem;
+    }
+    
+    .app-name {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+        margin-right: 80px; /* Make space for GitHub icon */
+    }
+    
+    .github-link {
+        top: 5px;
+    }
+    
+    .github-text {
+        display: none;
+    }
+    
+    .logo-container {
+        flex-wrap: wrap;
+    }
+    
+    .tankhe-logo {
+        margin-bottom: 10px;
     }
 }
 
@@ -571,13 +647,64 @@ input:focus, select:focus {
     text-align: left;
 }
 
-.footer-info p {
+.footer-text {
     margin: 0.5rem 0;
     color: var(--text-secondary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.footer-item {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.separator {
+    color: #ddd;
+    font-weight: 300;
+    display: inline-block;
+}
+
+.disclaimer-text {
+    color: #666;
+    font-style: italic;
 }
 
 .footer-info strong {
     color: var(--primary-color);
+}
+
+/* Update responsive design for footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-info {
+        text-align: center;
+    }
+    
+    .footer-text {
+        justify-content: center;
+    }
+    
+    /* Hide separators on small screens when items wrap to new lines */
+    .footer-text {
+        gap: 0.25rem 0.5rem;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    .footer-item {
+        border-right: none;
+        padding: 0.25rem 0;
+    }
 }
 
 .footer-qrcode {
@@ -594,10 +721,14 @@ input:focus, select:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .qrcode-image:hover {
-    transform: scale(1.05);
+    transform: scale(3);
+    z-index: 10;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .qrcode-download {
@@ -653,29 +784,11 @@ input:focus, select:focus {
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-info {
-        text-align: center;
-    }
-}
-
 /* 自动撑满剩余空间 */
 .form-content {
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-.separator {
-    color: var(--border-color);
-    font-weight: 300;
-    display: inline-block;
-    margin: 0 0.2rem;
 }
 
 /* 分享按钮样式 */
@@ -848,4 +961,252 @@ input:focus, select:focus {
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+/* Add GitHub icon styles */
+.main-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.github-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.github-link:hover {
+    transform: scale(1.05);
+}
+
+.github-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #1b1f23;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.github-icon:hover {
+    background-color: #333;
+}
+
+.github-text {
+    font-size: 14px;
+    color: #1b1f23;
+    font-weight: 600;
+    background-color: #f6f8fa;
+    padding: 4px 8px;
+    border-radius: 16px;
+    border: 1px solid #e1e4e8;
+    transition: all 0.3s ease;
+}
+
+/* Footer QR code link styles */
+.footer-qrcode a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-qrcode a:hover {
+    text-decoration: none;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Background music control */
+.music-control {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 100;
+}
+
+.music-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    outline: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+.music-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Vinyl Record Player Styles */
+.vinyl-player {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl-disc {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(145deg, #111, #333);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.vinyl-grooves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+        circle at center,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(80, 80, 80, 0.3) 2px,
+        rgba(80, 80, 80, 0.3) 3px
+    );
+    z-index: 1;
+}
+
+.vinyl-center {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #d1d1d1;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #999;
+    z-index: 2;
+}
+
+.player-arm {
+    position: absolute;
+    top: 25px;
+    right: 22px;
+    width: 20px;
+    height: 2px;
+    background: #999;
+    transform-origin: right center;
+    transform: rotate(-30deg);
+    transition: transform 0.5s ease;
+    z-index: 3;
+}
+
+.arm-body {
+    position: absolute;
+    right: -5px;
+    top: -3px;
+    width: 10px;
+    height: 8px;
+    background: #777;
+    border-radius: 2px;
+    z-index: 3;
+}
+
+.arm-head {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 4px;
+    height: 4px;
+    background: #aaa;
+    border-radius: 1px;
+    z-index: 3;
+}
+
+/* Record spinning animation */
+@keyframes vinylSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.playing .vinyl-disc {
+    animation: vinylSpin 2s linear infinite;
+}
+
+.playing .player-arm {
+    transform: rotate(0deg);
+}
+
+/* Remove old styles */
+.music-icon, .netease-speaker, .speaker-body, .sound-wave {
+    display: none;
+}
+
+/* 弹壳AI Logo样式 */
+.tankhe-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.tankhe-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.tankhe-logo a:hover {
+    transform: scale(1.05);
+}
+
+.logo-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(93, 69, 229, 0.3);
+}
+
+.tankhe-logo a:hover .logo-image {
+    transform: rotate(10deg);
+}
+
+.tankhe-text {
+    font-weight: 600;
+    color: #1a1c2e;
+    font-size: 18px;
 } 
